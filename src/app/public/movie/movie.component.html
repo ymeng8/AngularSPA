@@ -1,9 +1,11 @@
 <div class="container-fluid p-4">
     <div class="row">
         <div class="col-6 col-lg-3 col-sm-4 col-xl-2" *ngFor="let movie of movies">
-            <div class="card mb-4">
-                <img class="imgae-fluid rounded" src="{{movie.posterUrl}}" alt="{{movie.title}}"/>
-            </div>
+            <a routerLink="/Movie-Details/{{movie.id}}">
+                <div class="card mb-4">
+                    <img class="rounded" src="{{movie.posterUrl}}" alt="{{movie.title}}"/>
+                </div>
+            </a>
         </div>
     </div>
 </div>

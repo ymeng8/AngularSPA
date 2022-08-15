@@ -1,1 +1,47 @@
-<p>reviews works!</p>
+<div class="container-fluid p-4 min-vh-100">
+    <div class="row">
+        <div class="col-md-10 mx-auto">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Rating</th>
+                        <th scope="col">Created Date</th>
+                        <th scope="col">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let r of reviews; index as i">
+                        <td scope="row">{{i+1}}</td>
+                        <td>{{r.movieTitle}}</td>
+                        <td>{{r.rating}} / 10</td>
+                        <td>{{r.createdDate | date:"mediumDate"}}</td>
+                        <td class="hstack gap-2">
+                            <div>
+                                <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal" attr.data-bs-target="#review{{r.movieId}}Modal">
+                                    View
+                                </button>
+                                <div class="modal fade" id="review{{r.movieId}}Modal" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Review details</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <span>{{r.reviewText}}</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" class="btn btn-sm btn-outline-primary" value="Edit"/>
+                            <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

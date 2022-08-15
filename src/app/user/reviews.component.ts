@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../core/services/user.service';
+import { ReviewDetails } from '../shared/models/ReviewDetails';
 
 @Component({
   selector: 'app-reviews',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewsComponent implements OnInit {
 
-  constructor() { }
+  reviews:ReviewDetails[];
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+    this.userService.getUserReviews().subscribe(m => { this.reviews = m; })
   }
 
 }

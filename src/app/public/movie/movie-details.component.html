@@ -2,20 +2,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css" integrity="sha512-OivR4OdSsE1onDm/i3J3Hpsm5GmOVvr9r49K3jJ0dnsxVzZgaOJ5MfxEAxCyGrzWozL9uJGKz6un3A7L+redIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="container-fluid">
-    <div class="row bg-dark bg-gradient">
+    <div class="row bg-light">
         <div class="col-4">
             <img src="{{movie?.posterUrl}}" alt="{{movie?.title}}" class="img-fluid float-end" style="width:20vw; height:auto;" />
         </div>
-        <div class="col-6 py-3 px-5 text-white">
+        <div class="col-6 py-3 px-5">
             <div class="hstack gap-2 justify-content-between">
                 <h2>{{movie?.title}}</h2>
                 <button type="submit" style="background-color:transparent; border:0; padding:0;"><i class="bi-star h4 text-warning"></i></button>
             </div>
-            <p class="text-white-50 mb-2" style="font-size:small">{{movie?.tagline}}</p>
+            <p class="text-dark-50 mb-2" style="font-size:small">{{movie?.tagline}}</p>
             <div class="hstack gap-1 justify-content-end fw-bold">
                  <span class="badge rounded-pill bg-secondary ms-1" *ngFor="let genre of movie?.genres">{{genre.name}}</span>
             </div>
-            <p class="fw-semibold text-white-50">
+            <p class="fw-semibold text-dark-50">
                 <span>{{movie?.runTime}} m | </span>
                 <span>{{movie?.releaseDate|date:'y'}}</span>
             </p>
@@ -25,35 +25,35 @@
         <div class="col-2 py-5 pe-5">
             <div class="vstack gap-3">
                 <a class="btn btn-sm btn-secondary"><i class="bi-card-text me-2"></i>REVIEW</a>
-                <a class="btn btn-sm btn-light">BUY ${{movie?.price?.toFixed(2)}}</a>
+                <a class="btn btn-sm btn-outline-secondary">BUY {{movie?.price | currency}}</a>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-4 bg-light py-3 px-5">
+        <div class="col-4 py-3 px-5">
             <div class="mb-4">
                 <h5>MOVIE FACTS</h5>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-transparent">
                         <i class="bi-calendar3 me-1"></i>
                         <span>Release Date</span>
-                        <span class="badge rounded-pill bg-dark ms-1">{{movie?.releaseDate|date:"mediumDate"}}</span>
+                        <span class="badge rounded-pill bg-secondary ms-1">{{movie?.releaseDate|date:"mediumDate"}}</span>
                     </li>
                     <li class="list-group-item bg-transparent">
                         <i class="bi-hourglass-split me-1"></i>
                         <span>Run Time</span>
-                        <span class="badge rounded-pill bg-dark ms-1">{{movie?.runTime}} m</span>
+                        <span class="badge rounded-pill bg-secondary ms-1">{{movie?.runTime}} m</span>
                     </li>
                     <li class="list-group-item bg-transparent">
                         <i class="bi-cash me-1"></i>
                         <span>Box Office</span>
-                        <span class="badge rounded-pill bg-dark ms-1">${{movie?.revenue?.toFixed(2)}}</span>
+                        <span class="badge rounded-pill bg-secondary ms-1">{{movie?.revenue | currency}}</span>
                     </li>
                     <li class="list-group-item bg-transparent">
                         <i class="bi-currency-dollar me-1"></i>
                         <span>Budget</span>
-                        <span class="badge rounded-pill bg-dark ms-1">${{movie?.budget?.toFixed(2)}}</span>
+                        <span class="badge rounded-pill bg-secondary ms-1">{{movie?.budget | currency}}</span>
                     </li>
                     <li class="list-group-item bg-transparent">
                         <a href="{{movie?.imdbUrl}}" class="fa fa-brands fa-imdb text-decoration-none text-dark"></a>
@@ -75,15 +75,13 @@
             <h5>CASTS</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" *ngFor="let cast of movie?.casts">
-                    <div class="hstack">
-                        <a>
+                    <a routerLink="/Cast-Details/{{cast.id}}" class="text-decoration-none text-dark">
+                        <div class="hstack">
                             <img class="img-fluid rounded-circle" style="width:2vw" src="{{cast.profilePath}}" alt="{{cast.name}}">
-                        </a>
-                        <a class="align-self-start text-decoration-none text-dark" style="width:15vw; margin-left: 4vw;">
-                            <span>{{cast.name}}</span>
-                        </a>
-                        <span class="align-self-start" style="width:15vw; margin-left: 4vw;">{{cast.character}}</span>
-                    </div>
+                            <span class="align-self-start" style="width:15vw; margin-left: 4vw;">{{cast.name}}</span>
+                            <span class="align-self-start" style="width:15vw; margin-left: 4vw;">{{cast.character}}</span>                       
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>

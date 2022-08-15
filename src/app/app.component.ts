@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from './core/services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AngularSPA';
+  
+  constructor(private accountService:AccountService) {}
+
+  ngOnInit(): void {
+    if (localStorage.getItem('token') != null) {
+      this.accountService.validateJWT();
+    };
+  }
 }

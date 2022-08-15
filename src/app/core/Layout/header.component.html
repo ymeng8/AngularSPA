@@ -1,33 +1,90 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
 <header class="sticky-top">
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark bg-gradient shadow">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                MovieShop
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light shadow-sm">
+      <div class="container-fluid">
+          <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+              MovieShop
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+              <ul class="navbar-nav flex-grow-1">
+                  <div class="hstack me-auto">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      <a class="nav-link" [routerLink]="'/'">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Movies</a>
+                      <a class="nav-link" [routerLink]="'/Genre'">Genres</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Genres</a>
+                      <a class="nav-link" [routerLink]="'/'">Casts</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" [routerLink]="'/'">Reviews</a>
+                    </li>
+                  </div>
+                  <div class="hstack">
+                    <div>
+                      <li class="nav-item dropdown" *ngIf="isAdmin">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                          Admin</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" [routerLink]="'/Admin/Top-Purchases'">
+                                    Top Purchases
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="'/Admin/Create-Movie'">
+                                    Create Movie
+                                </a>
+                            </li>
+                        </ul>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Reviews</a>
+                    </div>
+                    <div>
+                      <li class="nav-item dropdown" *ngIf="isLoggedIn">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                          {{currentUser.given_name}} {{currentUser.family_name}}</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" [routerLink]="'/User/Purchases'">
+                                    Purchases<i class="bi-collection-play ms-2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="'/User/Favorites'">
+                                    Favorites<i class="bi-star-fill ms-2"></i>
+                                </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" [routerLink]="'/User/Reviews'">
+                                  Reviews<i class="bi-chat-quote ms-2"></i>
+                              </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="'/User/Edit-Profile'">
+                                    View Profile<i class="bi-person-circle ms-2"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item btn rounded-0" (click)="logout()">
+                                    Logout<i class="bi-box-arrow-right ms-2"></i>
+                                </a>
+                            </li>
+                        </ul>
                       </li>
-                  </ul>
-                  <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                  </form>
-            </div>
-        </div>
-    </nav>
+                      <li class="nav-item hstack gap-2" *ngIf="!isLoggedIn">
+                        <a class="btn btn-sm btn-primary" [routerLink]="'/Account/Login'">Login</a>
+                        <a class="btn btn-sm btn-primary" [routerLink]="'/Account/Register'">Register</a>
+                      </li>
+                    </div>
+                  </div>
+                </ul>
+          </div>
+      </div>
+  </nav>
 </header>

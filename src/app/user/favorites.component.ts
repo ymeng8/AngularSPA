@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../core/services/user.service';
+import { Movie } from '../shared/models/Movie';
 
 @Component({
   selector: 'app-favorites',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor() { }
+  favorites:Movie[];
+  constructor(private userService:UserService) { }
 
   ngOnInit(): void {
+    this.userService.getUserFavorites().subscribe(m => {
+      console.log(m); 
+      this.favorites = m; 
+    });
   }
 
 }

@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="container-fluid p-4 min-vh-100">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div *ngIf="success" class="alert alert-success">Login success! Redirecting to Homepage...</div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>Login</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input formControlName="email" type="email" class="form-control" />
+                            <span *ngIf="(loginForm.controls['email'].touched || submitted) && (loginForm.controls['email'].errors?.['required'])" 
+                            class="text-danger">Email is required</span>
+                            <span *ngIf="(loginForm.controls['email'].touched || submitted) && (loginForm.controls['email'].errors?.['email'])" 
+                            class="text-danger">Please enter a valid email</span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input formControlName="password" type="password" class="form-control" />
+                            <span *ngIf="(loginForm.controls['password'].touched || submitted) && (loginForm.controls['password'].errors?.['required'])" 
+                            class="text-danger">Password is required</span>
+                        </div>
+                        <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

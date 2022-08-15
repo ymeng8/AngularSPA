@@ -1,1 +1,11 @@
-<p>favorites works!</p>
+<div class="container-fluid p-4 min-vh-100">
+    <div class="row">
+        <div class="col-6 col-lg-3 col-sm-4 col-xl-2" *ngFor="let f of favorites">
+            <a routerLink="/Movie-Details/{{f.id}}">
+                <div class="card mb-4">
+                    <img class="rounded" src="{{f.posterUrl}}" alt="{{f.title}}"/>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

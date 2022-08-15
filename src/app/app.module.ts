@@ -10,7 +10,9 @@ import { MovieComponent } from './public/movie/movie.component';
 import { MovieDetailsComponent } from './public/movie/movie-details.component';
 import { CastDetailsComponent } from './public/cast/cast-details.component';
 import { GenreComponent } from './public/genre/genre.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { JwtAdderInterceptor } from './core/Interceptors/jwt-adder.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,12 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     CoreModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtAdderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
